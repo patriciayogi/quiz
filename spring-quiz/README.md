@@ -1,13 +1,18 @@
-# Spring Data - MySql
+# React.js and Spring Data REST
+
+We will be using Spring Data REST and its powerful backend functionality, combined with React’s sophisticated features
+to build an easy-to-understand UI and Thymeleaf.
+
+Spring Data REST provides a fast way to build hypermedia-powered repositories.
+
+React is Facebook’s solution to efficient, fast, and easy-to-use views in JavaScript.
+
+## RESTful web service application:
 
 This application generates quizzes.
 
 - load data to MySql database using Spring Data.
 - retrieves data from MySql.
-
-## Sample RESTful web service application:
-
-- Retrieve data from MySql
 
 ## What You Need
 
@@ -28,9 +33,6 @@ This application generates quizzes.
   spring.datasource.username=springuser
   spring.datasource.password=ThePassword
   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-### Reference Documentation
-
-Go to MongoDB and follow the below steps to create your database for the project
-
-- Getting Started with Atlas: https://www.mongodb.com/docs/atlas/getting-started/
+- Make Some Security Changes(regrant permissions)
+  mysql> revoke all on db_example.* from 'springuser'@'%';
+  mysql> grant select, insert, delete, update on db_example.* to 'springuser'@'%';

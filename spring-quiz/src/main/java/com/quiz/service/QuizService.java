@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -20,6 +21,7 @@ public class QuizService {
 
     public Quiz findQuestions() {
         Iterable<Question> questions = quizRepository.findAll();
+        questions.forEach(q -> Collections.shuffle(q.getOptions()));
         return Quiz.builder().questions(StreamSupport.stream(questions.spliterator(), false)
                 .collect(Collectors.toList())).build();
     }

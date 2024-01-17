@@ -1,44 +1,40 @@
 'use strict';
 
-// tag::vars[]
-const React = require('react'); // <1>
-const ReactDOM = require('react-dom'); // <2>
-const client = require('./client'); // <3>
-// end::vars[]
+const React = require('react');
+const ReactDOM = require('react-dom');
+const client = require('./client');
 
-// tag::app[]
-class App extends React.Component { // <1>
+class App extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {questions: []};
 	}
 
-	componentDidMount() { // <2>
-		client({method: 'GET', path: '/api/questions'}).done(response => {
-			this.setState({questions: response.entity._embedded.questions});
+	componentDidMount() {
+		client({method: 'GET', path: '/quiz'}).done(response => {
+			this.setState({questions: response.entity.questions});
 		});
 	}
 
-	render() { // <3>
+	render() {
 		return (
 			<QuestionList questions={this.state.questions}/>
 		)
 	}
 }
-// end::app[]
 
-// tag::employee-list[]
 class QuestionList extends React.Component{
 	render() {
 		const questions = this.props.questions.map(question =>
-			<Employee key={question._links.self.href} question={question}/>
+			<Question key={question.id} question={question}/>
 		);
 		return (
 			<table>
 				<tbody>
 					<tr>
 						<th>Question</th>
+						<th>Options</th>
 						<th>Explanation</th>
 					</tr>
 					{questions}
@@ -47,24 +43,37 @@ class QuestionList extends React.Component{
 		)
 	}
 }
-// end::employee-list[]
 
-// tag::employee[]
-class Employee extends React.Component{
+
+
+class Question extends React.Component{
 	render() {
+	    const options = this.props.question.options.map(option =>
+    			<Option key={option.id} option={option}/>
+    		);
 		return (
 			<tr>
 				<td>{this.props.question.questionText}</td>
+				<td>
+				    <ul>
+                         {options}
+                    </ul>
+                </td>
 				<td>{this.props.question.explanation}</td>
 			</tr>
 		)
 	}
 }
-// end::employee[]
 
-// tag::render[]
+class Option extends React.Component{
+	render() {
+		return (
+            <li>{this.props.option.description}</li>
+		)
+	}
+}
+
 ReactDOM.render(
 	<App />,
 	document.getElementById('react')
 )
-// end::render[]

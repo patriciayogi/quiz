@@ -36,3 +36,7 @@ This application generates quizzes.
 - Make Some Security Changes(regrant permissions)
   mysql> revoke all on db_example.* from 'springuser'@'%';
   mysql> grant select, insert, delete, update on db_example.* to 'springuser'@'%';
+- run the application
+  mvn clean install
+- load with dummy questions:
+  POST: load/

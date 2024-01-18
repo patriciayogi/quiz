@@ -1,15 +1,15 @@
+# Quiz web application
+
+This application generates multiple choices quizzes.
+
 # React.js and Spring Data REST
 
 We will be using Spring Data REST and its powerful backend functionality, combined with React’s sophisticated features
 to build an easy-to-understand UI and Thymeleaf.
 
-Spring Data REST provides a fast way to build hypermedia-powered repositories.
-
 React is Facebook’s solution to efficient, fast, and easy-to-use views in JavaScript.
 
 ## RESTful web service application:
-
-This application generates quizzes.
 
 - load data to MySql database using Spring Data.
 - retrieves data from MySql.
@@ -38,5 +38,6 @@ This application generates quizzes.
   mysql> grant select, insert, delete, update on db_example.* to 'springuser'@'%';
 - run the application
   mvn clean install
+  run QuizApplication
 - load with dummy questions:
   POST: load/
